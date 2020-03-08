@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <div class = "container-fluid">
+    <div class = 'row banner'>
+        <div class="col-md-3">
+        </div>
+        <div class='col-md-6 text-center'>
+            <br> <br>
+            <h1 class="main_banner"> Mission to Mars </h1>
+            <a href="/scrape" id="scrape_button" class="btn btn-primary" role="button">Scrape Mars Data</a>
+            <br> <br>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <div id="first_text" class="row">
+        <div class='col-md-1'>
+        </div>
+        <div class="col-md-10">
+        <br> <br>
+            {% if news_title %}
+                <h2>Latest Mars News</h2>
+                <hr>
+                <h3>{{news_title}}</h3>
+                <p> {{news_story}}</p>
+                <br>
+            {% else %}
+                <h2>Click the scrape button below to generate data.</h2>
+              <br>
+            {% endif %}
+        </div>
+        <div class='col-md-1'>
+        </div>
+    </div>
+    <hr>
+    <div class='row'>
+        <div class='col-md-8'>
+            <h3>Featured Image</h3>
+            <hr>
+            <figure>
+                <img src={{featured_image_url}} alt="Featured image for NASA mars page">
+            </figure>
+        </div>
+        <div class='col-md-4'>
+            <div class="data-box">
+                <h3>Current Weather on Mars</h3>
+                <hr>
+                <p>{{mars_weather_tweet}}</p>
+            </div>
+            <br>
+            <div class="data-box">
+                <h3>Mars Facts</h3>
+                <hr>
+                {{mars_facts_table|safe}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-md-12'>
+            <h2 class="text-center"> Mars Hemispheres </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-md-6'>
+            <figure>
+                <strong><figcaption class="hemisphere"> {{hem_t_0}} </figcaption></strong>
+                <img src={{hem_i_0}} alt="Mars hemisphere 0">
+            </figure>
+        </div>
+        <div class='col-md-6'>
+            <figure>
+                <strong><figcaption class="hemisphere"> {{hem_t_1}} </figcaption></strong>
+                <img src={{hem_i_1}} alt="Mars hemisphere 1">
+            </figure>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-md-6'>
+            <figure>
+                <strong><figcaption class="hemisphere"> {{hem_t_2}} </figcaption></strong>
+                <img src={{hem_i_2}} alt="Mars hemisphere 2">
+            </figure>
+        </div>
+        <div class='col-md-6'>
+            <figure>
+                <strong><figcaption class="hemisphere"> {{hem_t_3}} </figcaption></strong>
+                <img src={{hem_i_3}} alt="Mars hemisphere 3">
+            </figure>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

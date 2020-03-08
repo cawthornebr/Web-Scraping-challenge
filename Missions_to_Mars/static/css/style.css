@@ -1,0 +1,31 @@
+.banner{
+    background-color: lightgray;
+}
+
+h1.main_banner {
+    text-align: center;
+    color: black;
+}
+
+#scrape_button {
+    text-align: center;
+}
+
+#first_text {
+  background-color: white;
+}
+
+.container-fluid {
+    background: white;
+    outline: .01px double black;
+    padding: 5%;
+}
+
+figcaption.hemisphere_caption{
+    text-align: center;
+}
+
+img {
+    width: 85%;
+    height: auto;
+}

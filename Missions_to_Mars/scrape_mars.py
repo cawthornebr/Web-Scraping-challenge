@@ -6,22 +6,12 @@ from splinter.exceptions import ElementDoesNotExist
 import pandas as pd
 import time
 
-
-def initBrowser():
-    return Browser("chrome", headless=False)
-    time.sleep(10)
-
-def closeBrowser(browser):
-    browser.quit()
-    time.sleep(10)
-
-
 def scrape():
     mars_data = {}
 
     mars_data["news_data"] = news_scrape()
 
-    # mars_data["image"] = image_scrape()
+    mars_data["image"] = image_scrape()
 
     mars_data["twitter"] = twitter_scrape()
 
@@ -42,11 +32,10 @@ def news_scrape():
 
     response = req.get(url)
     soup = bs(response.text, 'html.parser')
-    time.sleep(5)
     #getting title and text from most recent news article
     soup_split = soup.find(class_='slide')
     soup_split1 = soup_split.find_all('a')
-    time.sleep(5)
+
     #title
     news_title = soup_split1[1].get_text().strip()
 
@@ -64,12 +53,11 @@ def image_scrape():
     # Scrape JPL for top image
     #----------
     image_dic = {}
-    browser = initBrowser()
 
-    # executable_path = {'executable_path': 'chromedriver.exe'}
-    # browser = Browser('chrome', **executable_path, headless=False)
+    executable_path = {'executable_path': 'chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=False)
 
-    time.sleep(10)
+    time.sleep(2)
 
     base_url_2 = "https://www.jpl.nasa.gov"
 
@@ -77,7 +65,7 @@ def image_scrape():
 
     browser.visit(url_2)
 
-    time.sleep(10)
+    time.sleep(2)
 
     html = browser.html
 
@@ -85,16 +73,14 @@ def image_scrape():
 
     img = soup.find('a', class_='button fancybox')
 
-    time.sleep(5)
-
     #getting top image url
     browser.click_link_by_partial_text('FULL IMAGE')
-    time.sleep(10)
+    time.sleep(2)
     browser.click_link_by_partial_text('more info')
-    time.sleep(10)
+    time.sleep(2)
     new_url = browser.url
     browser.visit(new_url)
-    time.sleep(10)
+    time.sleep(2)
     html2 = browser.html
     soup2 = bs(html2, 'html.parser')
     img = soup2.find('figure')
@@ -106,8 +92,7 @@ def image_scrape():
     image_dic["img_url"] = featured_image_url
 
     #quit spliter application
-    # browser.quit()
-    closeBrowser(browser)
+    browser.quit()
     
     return(image_dic)
     #----------
